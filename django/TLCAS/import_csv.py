@@ -26,5 +26,5 @@ def import_data(dataset_name):
                     )
 
 if __name__ == "__main__":
-	#import_data('AAAI')
+	import_data('AAAI')
 	import_data('ICML')
