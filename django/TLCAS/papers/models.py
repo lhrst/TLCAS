@@ -2,11 +2,11 @@ from django.db import models
 
 class ConferenceInfo(models.Model):
     name = models.CharField(max_length=50)
-    year = models.IntegerField()
+    year = models.IntegerField(1)
 
 class PaperInfo(models.Model):
     year = models.IntegerField()
-    conference_name = models.ForeignKey(ConferenceInfo, on_delete=models.CASCADE)
+    conference_name = models.CharField(max_length=50)
     paper_title = models.CharField(max_length=200)
     authors = models.CharField(max_length=300)
     abstract = models.CharField(max_length=5000)
