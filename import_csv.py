@@ -23,7 +23,6 @@ def import_data(dataset_name: str):
     with open('papers/static/dataset/' + dataset_name, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader) # 跳过表头
-        cnt = 1
         for row in reader:
             curr_conf, created = ConferenceInfo.objects.get_or_create(
                 name=row[8],
