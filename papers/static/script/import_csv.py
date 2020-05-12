@@ -6,6 +6,7 @@ django.setup()
 
 from papers.models import PaperInfo, ConferenceInfo
 
+### 还没修改 路径有问题先别用
 def import_data(dataset_name):
     with open('../../dataset/' + dataset_name + '.csv') as f:
            reader = csv.reader(f)
