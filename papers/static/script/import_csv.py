@@ -1,5 +1,6 @@
 import csv
-import os,django
+import os, django
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TLCAS.settings")
 django.setup()
 
