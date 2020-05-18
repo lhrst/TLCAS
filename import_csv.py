@@ -28,7 +28,7 @@ def import_data(dataset_name: str):
                 name=row[8],
                 year=int(row[1])
             )
-
+            
             curr_paper, created = PaperInfo.objects.get_or_create(
                 conference=curr_conf,
                 paper_title=row[2],
@@ -37,6 +37,7 @@ def import_data(dataset_name: str):
                 pdf_link=row[6]
             )
 
+
             if len(row[7].strip()) > 0:
                 curr_paper.affiliations = row[7].strip()
             if len(row[5].strip()) > 0:
@@ -44,6 +45,6 @@ def import_data(dataset_name: str):
             curr_paper.save()
 
 if __name__ == "__main__":
-    # import_data('AAAI.csv')
-	# import_data('ICML.csv')
-    pass
+    # PaperInfo.objects.all().delete()
+    import_data('ICCV.csv')
+    import_data('CVPR.csv')
