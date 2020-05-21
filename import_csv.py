@@ -46,5 +46,7 @@ def import_data(dataset_name: str):
 
 if __name__ == "__main__":
     # PaperInfo.objects.all().delete()
-    import_data('ICCV.csv')
-    import_data('CVPR.csv')
+    # import_data('ICCV.csv')
+    # import_data('CVPR.csv')
+    # import_data('AAAI.csv')
+    import_data('ICML.csv')
