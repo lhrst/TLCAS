@@ -9,30 +9,8 @@
 {% endfor %}
 </ul>
 
-<!-- <nav aria-label="Page navigation">
-    <div class="pagination">
-        <ul class="pagination">
-        {% if page.has_previous %}  
-            <li><a href="{% url 'index' page.previous_page_number %}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span></a></li>
-        {% endif %}
 
-        {% for num in page.paginator.page_range%} 
-            {%if pindex == page.number%}
-                <li><a href="">{{ num }}</a></li>
-            {%else%}
-                <li><a href="{% url 'index' num %}">{{ num }}</a></li>
-            {%endif%}
-         {% endfor %}
-
-         {% if page.has_next %} 
-             <li><a href="{% url 'index' page.next_page_number %}" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span></a></li>
-          {% endif %}
-           </ul>
-    </div>
-</nav> -->
-
+<!-- 以下为分页栏 -->
 <div>
     <nav aria-label="Page navigation">
       <ul class="pagination">
@@ -81,6 +59,6 @@
       </ul>
     </nav>
 </div>
-
+<!-- 以上为分页栏 -->
 
 {% endblock %}
