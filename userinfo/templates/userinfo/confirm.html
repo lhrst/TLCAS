@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-{% endblock %}
-{% block body %}
 <script>
     $.toaster("{{message}}")
     window.setTimeout("window.location='/login/'",1000);
 </script>
+{% endblock %}
+{% block body %}
 {% endblock %}
