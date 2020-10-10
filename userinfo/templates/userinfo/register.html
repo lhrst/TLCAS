@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label>邮箱</label>
-                        <input type="text" style="" required="required" class="form-control" name="student_id" placeholder="常用邮箱" value="{{student_id}}">             
+                        <input type="text" style="" required="required" class="form-control" name="email" placeholder="常用邮箱" value="{{student_id}}">             
                     </div>
                     <div class="form-group">
                         <label>密码（8位及以上）</label>
@@ -45,4 +45,9 @@
         </div>
     </div>
 </main>
+{% if message %}
+<script>
+$.toaster("{{ message }}", "注册失败", "danger");
+</script>
+{% endif %}
 {% endblock %}

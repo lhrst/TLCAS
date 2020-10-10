@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'userinfo',
     'captcha',
     'userinfo.mycaptcha',
+    'userinfo.emailsender',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,7 +125,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'platform_office@163.com'
-EMAIL_HOST_PASSWORD = 'SQM811021'
+EMAIL_HOST_PASSWORD = 'TSNIYIISNKAMNRXN'
 
 # 注册有效期天数
 CONFIRM_DAYS = 7

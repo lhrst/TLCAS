@@ -10,5 +10,6 @@ class UserInformation(AbstractUser):
         return '{name}({email})'.format(name=self.username, email=self.email)
     
     class Meta:
+        ordering = ["-date_joined"]
         verbose_name = '用户信息'
         verbose_name_plural = verbose_name
