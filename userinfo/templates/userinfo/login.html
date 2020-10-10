@@ -1,51 +1,5 @@
 {% extends 'base.html' %}
 {% block head %}
-<script>
-    var email;
-    function sendVCode() {
-        if (email != $('#email').val()) {
-            if ($('#email').val().length > 0) {
-                $.get('/login/email/vcode/?email=' + $('#email').val(), function (data, status) {
-                    if(data.status != 'ok'){
-                        $.toaster(data.status, '失败')
-                    }else{
-                        $.toaster('邮箱验证码已发送', '成功');
-                        email = $('#email').val();
-                    }
-                }, 'json');
-            } else {
-                $.toaster('请输入邮件地址', '错误', 'danger');
-            }
-        } else {
-            $.toaster('验证码已经发送。<br>未收到？刷新重试。', '错误', 'danger');
-        }
-    }
-</script>
 {% endblock %}
 {% block body %}
-<div class="container">
-    <form method="POST">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3">
-                <div class="mt-3 text-center">
-                    邮箱登陆（临时）
-                </div>
-                <div class="input-group mt-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">邮箱</span>
-                    </div>
-                    <input name="email" id="email" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group mt-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">邮箱验证码</span>
-                    </div>
-                    <input name="vcode" id="vcode" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" onfocus="sendVCode();">
-                </div>
-                <button class="btn btn-primary btn-block mt-3">登陆</button>
-            </div>
-        </div>
-    </form>
-</div>
 {% endblock %}

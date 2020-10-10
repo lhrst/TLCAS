@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def register(request):
-    return HttpResponse('register')
+    return render(request, "userinfo/register.html")
 
 def login(request):
     return HttpResponse('login')
