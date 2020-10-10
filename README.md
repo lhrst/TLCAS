@@ -10,3 +10,11 @@ tasklist
   - [x] 建立models
   - [ ] 将数据集批量导入models中
 - [ ] 对数据集进行分析，尝试得出一些结论
+
+## BUILD
+>由于本地配置的python3环境不同，如果以下命令执行失败，可以尝试将`python3`替换为`python`，`pip3`替换为`pip`重试，
+1. `git pull origin master`
+2. `pip3 install -r requirements` 或 `python3 -m pip install -r requirements`
+3. `python3 manage.py collectstatic`
+4. `python3 manage.py migrate`
+5. `python3 manage.py runserver`
