@@ -37,7 +37,6 @@ def import_data(dataset_name: str):
                 pdf_link=row[6]
             )
 
-
             if len(row[7].strip()) > 0:
                 curr_paper.affiliations = row[7].strip()
             if len(row[5].strip()) > 0:

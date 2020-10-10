@@ -1,9 +1,13 @@
-from django.urls import path
-from userinfo import views
+from django.urls import path, include
+from userinfo import views as user_views
+from userinfo.mycaptcha import views as captcha_views
 
 urlpatterns = [ 
-    path('login/', views.login),
-    path('register/', views.register),
-    path('logout/', views.logout),
-    path('confirm/', views.user_confirm),
+    path('login/', user_views.login),
+    path('register/', user_views.register),
+    path('logout/', user_views.logout),
+    path('confirm/', user_views.user_confirm),
+
+    path('captcha/', include('captcha.urls')),
+    path('refresh_captcha/', captcha_views.refresh_captcha),
 ]
