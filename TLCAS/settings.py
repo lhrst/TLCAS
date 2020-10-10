@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'papers.apps.PapersConfig',
+    'userinfo.apps.UserinfoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,6 +86,8 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
+AUTH_USER_MODEL = 'userinfo.UserInformation'
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -104,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -112,10 +115,35 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
+## 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'platform_office@163.com'
+EMAIL_HOST_PASSWORD = 'SQM811021'
+
+# 注册有效期天数
+CONFIRM_DAYS = 7
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 当运行 python manage.py collectstatic 的时候
+# STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来
+# 把这些文件放到一起是为了用apache等部署的时候更方便
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
+# 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT
+# 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'common_static'),
+    os.path.join(BASE_DIR, 'analysis', 'static'),
+    os.path.join(BASE_DIR, 'papers', 'static'),
+    os.path.join(BASE_DIR, 'prediction', 'static'),
+    os.path.join(BASE_DIR, 'userinfo', 'static'),
+)
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
