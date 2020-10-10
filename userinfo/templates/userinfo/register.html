@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block head %}
+<script src="{% static 'js/captcha.js' %}"></script>
 {% endblock %}
 {% block body %}
 <main>
     <div class="container">
         <div class="col-12">
             <div class="mt-3">
-                    <div class="title">
-                       <h3>欢迎注册TLCAS-顶会论文分析系统</h3>
-                    </div>
+                <center>
+                    <h3>欢迎注册TLCAS-顶会论文分析系统</h3>
+                </center>
                 <form class="form-default" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
@@ -28,20 +30,15 @@
                         <input type="password" required="required" class="form-control" name="password2" id="loginUserPassword" placeholder="再次输入你的密码" value="{{password2}}">
                     </div>
                     <div class="form-group">
-                      <a class="next-captcha">
-                        <label>验证码</label>
-                        <img src="{{imgage_url}}" class="captcha" alt="captcha">
-                        <input type="text" required="required" class="form-control" name="captcha_1" placeholder="验证码">
-                      </a>
-                      <input id="id_reg_captcha_0" name="captcha_0" type="hidden" value="{{hashkey}}">
+                        <a href="#" class="captcha">
+                        <img  src="{{ captcha.image_url }}" alt="点击切换" id="id_captcha" >
+                        </a> <br>
+                        <input type="text" name="captcha_1" autocomplete="off" required="true" placeholder="验证码"> <br>
+                        <input value="{{ captcha.hashkey }}" name="captcha_0" type="hidden" id="id_captcha_0">
                     </div>
-                    {% if message %}
-                        <div class="alert alert-warning">{{ message }}</div>
-                    {% endif %}
                     <div class="form-group">
-                        <input type="submit" class="btn btn-secondary btn-block" value="创建用户">
+                        <input type="submit" class="btn btn-primary btn-block" value="创建用户">
                     </div>
-                    
                     <p><center>已经注册过？ <a href="/login/" class="tt-underline">登录</a></center></p>
                 </form>
             </div>
