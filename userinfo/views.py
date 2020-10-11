@@ -66,6 +66,7 @@ def register(request):
 
 def login(request):
     if request.user.is_authenticated:
+        print(request.user.id)
         return redirect('/') # 无法重复登录
     if request.method == "GET":
         newcaptcha = captcha_views.generate_captcha()
@@ -127,9 +128,9 @@ def user_confirm(request):
         message = '感谢确认，请使用账户登录！'
         return render(request, 'userinfo/confirm.html', {'message': message})
 
-def profile_view(request, userid):
+def profile_view(request, uuid):
     try:
-        user = UserInformation.objects.get(id=userid) 
+        user = user_models.UserInformation.objects.get(uuid=uuid)
         return render(request, "userinfo/profile.html")
     except:
-        return Http404()
+        raise Http404()
