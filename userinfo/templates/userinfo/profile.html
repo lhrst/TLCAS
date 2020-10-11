@@ -1,8 +1,29 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block head %}
-
-{% endblock %}
 {% block body %}
-hello
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {% if request.user == user %}
+            <div class="card mt-3 border-dark">
+                <div class="card-header">
+                    个人信息
+                </div>
+                <div class="card-body">
+                    <p>用户名：{{request.user.username}}</p>
+                    <p>邮箱：{{request.user.email}}</p>
+                    <p>注册日期：{{request.user.date_joined}}</p>
+                    <a href="/profile/revise/" class="btn btn-primary">修改</a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    最近浏览
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
