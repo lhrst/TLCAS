@@ -45,9 +45,9 @@
         </div>
     </div>
 </main>
-{% if message %}
+{% if notice %}
 <script>
-$.toaster("{{ message }}", "注册失败", "danger");
+$.toaster("{{ notice.message }}", "{{ notice.sender }}", "{{ notice.flag }}");
 </script>
 {% endif %}
 {% endblock %}

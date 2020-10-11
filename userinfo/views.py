@@ -1,4 +1,5 @@
 import datetime
+from userinfo.models import UserInformation
 from django.http.response import Http404
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -38,6 +39,7 @@ def register(request):
         newcaptcha = captcha_views.generate_captcha()
         return render(request, "userinfo/register.html", {"captcha": newcaptcha})
     elif request.method == "POST":
+        newcaptcha = captcha_views.generate_captcha()
         rq_hashkey = request.POST.get('captcha_0', '')
         rq_captcha = request.POST.get('captcha_1', '')
         rq_username = request.POST.get('username', '').strip()
@@ -55,10 +57,11 @@ def register(request):
             # send email
             code = email_views.make_confirm_string(newuser)
             email_views.send_email(rq_email, code)
-            return redirect("/login/")
-        else:
-            newcaptcha = captcha_views.generate_captcha()
-            return render(request, "userinfo/register.html", {"captcha": newcaptcha, "message": message})
+            message = '注册成功，请前往邮箱确认！'
+            return render(request, "userinfo/register.html", {"captcha": newcaptcha, 
+                "notice": {'message': message, 'sender': '注册成功', 'flag': 'success'}})
+        return render(request, "userinfo/register.html", {"captcha": newcaptcha, 
+            "notice": {'message': message, 'sender': '注册失败', 'flag': 'danger'}})
 
 
 def login(request):
@@ -123,3 +126,10 @@ def user_confirm(request):
         confirm.delete()
         message = '感谢确认，请使用账户登录！'
         return render(request, 'userinfo/confirm.html', {'message': message})
+
+def profile_view(request, userid):
+    try:
+        user = UserInformation.objects.get(id=userid) 
+        return render(request, "userinfo/profile.html")
+    except:
+        return Http404()
