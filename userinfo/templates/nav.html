@@ -13,11 +13,11 @@
         </div>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                {% if user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item disabled">{{request.user.aliasname}}</a>
+                            <a class="dropdown-item disabled">{{request.user.username}}</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/profile/{{request.user.username}}/">个人主页</a>
                             <a class="dropdown-item" href="/profile/revise/">修改资料</a>

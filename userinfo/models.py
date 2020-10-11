@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 class UserInformation(AbstractUser):
     password = models.CharField(max_length=128, null=True, blank=True)
-
+    
     def __str__(self):
         return '{name}({email})'.format(name=self.username, email=self.email)
     

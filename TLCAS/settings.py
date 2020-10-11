@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'papers',
     'userinfo',
+    'analysis',
+    'prediction',
     'captcha',
     'userinfo.mycaptcha',
     'userinfo.emailsender',
