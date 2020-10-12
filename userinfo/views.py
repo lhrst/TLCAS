@@ -1,9 +1,11 @@
 import datetime
+from userinfo.models import UserInformation
+from django.http.response import Http404
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.validators import validate_email
-from django.contrib.auth import login
+from django.contrib import auth
 from django.contrib.auth.hashers import make_password
 
 from userinfo import models as user_models
@@ -30,12 +32,14 @@ def verify_account(username, email, password1, password2, hashkey, captcha) -> s
         return '邮箱[{}]已被注册'.format(email)
     return ''
 
-# Create your views here.
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('/') # 登录状态下无法注册
     if request.method == "GET":
         newcaptcha = captcha_views.generate_captcha()
         return render(request, "userinfo/register.html", {"captcha": newcaptcha})
     elif request.method == "POST":
+        newcaptcha = captcha_views.generate_captcha()
         rq_hashkey = request.POST.get('captcha_0', '')
         rq_captcha = request.POST.get('captcha_1', '')
         rq_username = request.POST.get('username', '').strip()
@@ -53,13 +57,17 @@ def register(request):
             # send email
             code = email_views.make_confirm_string(newuser)
             email_views.send_email(rq_email, code)
-            return redirect("/login/")
-        else:
-            newcaptcha = captcha_views.generate_captcha()
-            return render(request, "userinfo/register.html", {"captcha": newcaptcha, "message": message})
+            message = '注册成功，请前往邮箱确认！'
+            return render(request, "userinfo/register.html", {"captcha": newcaptcha, 
+                "notice": {'message': message, 'sender': '注册成功', 'flag': 'success'}})
+        return render(request, "userinfo/register.html", {"captcha": newcaptcha, 
+            "notice": {'message': message, 'sender': '注册失败', 'flag': 'danger'}})
 
 
 def login(request):
+    if request.user.is_authenticated:
+        print(request.user.id)
+        return redirect('/') # 无法重复登录
     if request.method == "GET":
         newcaptcha = captcha_views.generate_captcha()
         return render(request, "userinfo/login.html", {"captcha": newcaptcha})
@@ -68,6 +76,7 @@ def login(request):
         rq_captcha = request.POST.get('captcha_1', '')
         rq_user_or_email = request.POST.get('name_or_email', '').strip()
         rq_password = request.POST.get('password', '').strip()
+        user = None
         message = ''
         if not captcha_views.verify_captcha(rq_captcha, rq_hashkey):
             message = '验证码错误'
@@ -87,9 +96,7 @@ def login(request):
                 except:
                     message = '用户名不存在，请前往注册或进行邮箱认证'
         if message == '':
-            request.session['is_login'] = True
-            request.session['user_id'] = user.id
-            request.session['user_name'] = user.username
+            auth.login(request, user)
             return redirect('/')
         else:
             newcaptcha = captcha_views.generate_captcha()
@@ -97,7 +104,8 @@ def login(request):
 
 
 def logout(request):
-    return HttpResponse('logout')
+    auth.logout(request)
+    return redirect('/')
 
 def user_confirm(request):
     code = request.GET.get('code', None)
@@ -119,3 +127,12 @@ def user_confirm(request):
         confirm.delete()
         message = '感谢确认，请使用账户登录！'
         return render(request, 'userinfo/confirm.html', {'message': message})
+
+def profile_view(request, uuid):
+    try:
+        user = user_models.UserInformation.objects.get(uuid=uuid)
+        if request.user != user:
+            return redirect('/')
+        return render(request, "userinfo/profile.html")
+    except:
+        raise Http404()
