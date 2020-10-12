@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             {% if request.user == user %}
-            <div class="card mt-3 border-dark">
+            <div class="card mt-3 border-secondary">
                 <div class="card-header">
                     个人信息
                 </div>
@@ -17,11 +17,19 @@
                 </div>
             </div>
             {% endif %}
-            <div class="card mt-3">
+            <div class="card mt-3 border-secondary">
                 <div class="card-header">
-                    最近浏览
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.page != "collect" %} active {% endif %}" href="/profile/{{request.user.uuid}}/?page=history">近期浏览</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.page == "collect" %} active {% endif %}" href="/profile/{{request.user.uuid}}/?page=collect">论文收藏</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="card-body">
+
                 </div>
             </div>
         </div>

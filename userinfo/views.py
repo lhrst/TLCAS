@@ -131,6 +131,8 @@ def user_confirm(request):
 def profile_view(request, uuid):
     try:
         user = user_models.UserInformation.objects.get(uuid=uuid)
+        if request.user != user:
+            return redirect('/')
         return render(request, "userinfo/profile.html")
     except:
         raise Http404()
