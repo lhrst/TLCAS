@@ -1,5 +1,8 @@
-from django.urls import path
-from prediction import views
+from django.conf.urls import url
+from django.contrib import admin
 
-urlpatterns = [ 
+from prediction import views  #添加的
+
+urlpatterns = [
+    url(r'^home',views.home),
 ]
