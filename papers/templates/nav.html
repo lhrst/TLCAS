@@ -6,8 +6,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link {% if '/' == request.path %} active {% endif %}" href="/">首页</a>
-            <a class="nav-item nav-link {% if 'analysis' in request.path %} active {% endif %}" href="/utility/">数据分析</a>
-            <a class="nav-item nav-link {% if 'prediction' in request.path %} active {% endif %}" href="/tool/server/">内容预测</a>
+            <a class="nav-item nav-link {% if 'analysis' in request.path %} active {% endif %}" href="/analysis/">数据分析</a>
+            <a class="nav-item nav-link {% if 'prediction' in request.path %} active {% endif %}" href="/prediction/">内容预测</a>
             <a class="nav-item nav-link {% if 'help' in request.path %} active {% endif %}" href="/help/">帮助</a>
             <a class="nav-item nav-link {% if 'about' in request.path %} active {% endif %}" href="/about/">关于</a>
             <!-- 搜索栏 -->
