@@ -12,6 +12,7 @@ class ConferenceInfo(models.Model):
         verbose_name_plural = verbose_name
 
 class PaperInfo(models.Model):
+    objects = models.Manager()
     conference = models.ForeignKey(ConferenceInfo, on_delete=models.CASCADE, null=True, blank=True)
     paper_title = models.CharField(max_length=200)
     authors = models.CharField(max_length=300)

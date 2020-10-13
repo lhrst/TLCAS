@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+<ul>
+{% for paper in papers %}
+ <li><a href="{% url 'detail' paper.id %}">{{ paper.paper_title }}</a></li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

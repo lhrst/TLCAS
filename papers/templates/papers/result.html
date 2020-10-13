@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<main>
+<ul type="none">
+{% for paper in page %}
+
+ <li style="font-size: 20px;"><a href="{% url 'detail' paper.id %}">{{ paper.paper_title }}</a></li>
+
+{% endfor %}
+</ul>
+<!-- 以下为分页栏 -->
+<div>
+    <nav>
+      <ul class="pagination">
+      {% if page.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="{% url 'search' searchword page.previous_page_number %}" aria-label="Previous">
+            <span aria-hidden="true">&larr;Previous</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled page-item">
+          <a class="page-link" href="javascript:void(0);" aria-label="Previous">
+            <span aria-hidden="true">&larr;Previous</span>
+          </a>
+        </li>
+      {% endif %}
+      {% if paginator.has_previous_more %}
+        <li class="page-item"><a class="page-link" href="{% url 'search' searchword 1 %}">1</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0);">...</a></li>
+      {% endif %}
+      {% for previous_page in paginator.previous_range %}
+        <li class="page-item"><a class="page-link" href="{% url 'search' searchword previous_page %}">{{ previous_page }}</a></li>
+      {% endfor %}
+      <li class="active page-item"><a class="page-link" href="{% url 'search' searchword page.number %}">{{ page.number }}</a></li>
+      {% for next_page in paginator.next_range %}
+        <li class="page-item"><a class="page-link" href="{% url 'search' searchword next_page %}">{{ next_page }}</a></li>
+      {% endfor %}
+      {% if paginator.has_next_more %}
+        <li class="page-item"><a class="page-link" href="javascript:void(0);">...</a></li>
+        <li class="page-item"><a class="page-link" href="{% url 'search' searchword paginator.num_pages %}">{{ paginator.num_pages }}</a></li>
+      {% endif %}
+
+      {% if page.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="{% url 'search' searchword page.next_page_number %}" aria-label="Previous">
+            <span aria-hidden="true">Next&rarr;</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled page-item">
+          <a class="page-link" href="javascript:void(0);" aria-label="Previous">
+            <span aria-hidden="true">Next&rarr;</span>
+          </a>
+        </li>
+      {% endif %}
+      </ul>
+    </nav>
+</div>
+<!-- 以上为分页栏 -->
+</main>
+{% endblock %}
