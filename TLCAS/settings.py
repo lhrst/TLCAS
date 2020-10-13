@@ -31,8 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'papers.apps.PapersConfig',
-    'userinfo.apps.UserinfoConfig',
+    'papers',
+    'userinfo',
+    'analysis',
+    'prediction',
+    'captcha',
+    'userinfo.mycaptcha',
+    'userinfo.emailsender',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -117,12 +122,12 @@ USE_L10N = True
 
 USE_TZ = False
 
-## 
+# 注册时验证邮箱用的发送邮箱
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'platform_office@163.com'
-EMAIL_HOST_PASSWORD = 'SQM811021'
+EMAIL_HOST_PASSWORD = 'TSNIYIISNKAMNRXN'
 
 # 注册有效期天数
 CONFIRM_DAYS = 7
@@ -134,11 +139,8 @@ STATIC_URL = '/static/'
 
 # 当运行 python manage.py collectstatic 的时候
 # STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来
-# 把这些文件放到一起是为了用apache等部署的时候更方便
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
-# 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT
-# 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'common_static'),
     os.path.join(BASE_DIR, 'analysis', 'static'),
@@ -147,3 +149,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'userinfo', 'static'),
 )
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
+# CAPTCHA 验证码样式
+CAPTCHA_OUTPUT_FORMAT = '%(image)s %(text_field)s %(hidden_field)s '
+CAPTCHA_NOISE_FUNCTIONS = (
+    'captcha.helpers.noise_dots', # 点
+)
+CAPTCHA_TIMEOUT = 1 # minutes
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge' # 数学计算

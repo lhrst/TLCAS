@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {% if request.user == user %}
+            <div class="card mt-3 border-secondary">
+                <div class="card-header">
+                    个人信息
+                </div>
+                <div class="card-body">
+                    <p>用户名：{{request.user.username}}</p>
+                    <p>邮箱：{{request.user.email}}</p>
+                    <p>注册日期：{{request.user.date_joined}}</p>
+                    <a href="/profile/revise/" class="btn btn-primary">修改</a>
+                    <a href="/logout/" class="btn btn-danger">登出</a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="card mt-3 border-secondary">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.page != "collect" %} active {% endif %}" href="/profile/{{request.user.uuid}}/?page=history">近期浏览</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.page == "collect" %} active {% endif %}" href="/profile/{{request.user.uuid}}/?page=collect">论文收藏</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

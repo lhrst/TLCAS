@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" role="navigation">
     <a class="navbar-brand" href="/">TLCAS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -6,28 +6,26 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link {% if '/' == request.path %} active {% endif %}" href="/">首页</a>
-            <a class="nav-item nav-link {% if 'analysis' in request.path %} active {% endif %}" href="/utility/">数据分析</a>
-            <a class="nav-item nav-link {% if 'prediction' in request.path %} active {% endif %}" href="/tool/server/">内容预测</a>
+            <a class="nav-item nav-link {% if 'analysis' in request.path %} active {% endif %}" href="/analysis/">数据分析</a>
+            <a class="nav-item nav-link {% if 'prediction' in request.path %} active {% endif %}" href="/prediction/">内容预测</a>
             <a class="nav-item nav-link {% if 'help' in request.path %} active {% endif %}" href="/help/">帮助</a>
             <a class="nav-item nav-link {% if 'about' in request.path %} active {% endif %}" href="/about/">关于</a>
         </div>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            {% if request.user.is_authenticated %}
+            <form class="form-inline">
+                <a href="#">
+                    <i class="fa fa-bell-o" style="font-size:20px;color:white;">
+                    <span class="badge badge-pill badge-danger" style="font-size:5px">4</span>
+                    </i>
+                </a>
+            </form>
+            {% endif %}
             <li class="nav-item">
-                {% if user.is_authenticated %}
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item dropdown">
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item disabled">{{request.user.aliasname}}</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/profile/{{request.user.username}}/">个人主页</a>
-                            <a class="dropdown-item" href="/profile/revise/">修改资料</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/logout/">登出</a>
-                        </div>
-                    </li>
-                </ul>
+                {% if request.user.is_authenticated %}
+                <a style="margin-left:10px" href="/profile/{{ request.user.uuid }}/" class="btn btn-outline-light btn-sm">个人资料</a>
                 {% else %}
-                <a href="/login/" class="btn btn-outline-primary">登录</a>
+                <a href="/login/" class="btn btn-outline-info btn-sm">登录</a>
                 {% endif %}
             </li>
         </ul>
