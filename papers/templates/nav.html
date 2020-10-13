@@ -10,6 +10,26 @@
             <a class="nav-item nav-link {% if 'prediction' in request.path %} active {% endif %}" href="/tool/server/">内容预测</a>
             <a class="nav-item nav-link {% if 'help' in request.path %} active {% endif %}" href="/help/">帮助</a>
             <a class="nav-item nav-link {% if 'about' in request.path %} active {% endif %}" href="/about/">关于</a>
+            <!-- 搜索栏 -->
+            {% if searchword %}
+            <form class="form-inline my-2 my-lg-0" role="search" method="get" action="{% url 'search' searchword 1 %}" target="_blank" style="margin-left: 10px;" >
+                <div class="input-group" style="text-align:center; margin:0 auto;">
+                    <input type="text" class="form-control" name="q" placeholder="{{searchword}}" style="border-radius:20px;width: 233px;">
+                    <span class="input-group-btn"style="margin-left: 5px;">
+                        <button type="submit" class="btn btn-secondary">Search</button>
+                    </span>
+                </div><!-- /input-group -->
+            </form>
+            {% else %}
+            <form class="form-inline my-2 my-lg-0" role="search" method="get" action="{% url 'search' 'AI' 1 %}" target="_blank" style="margin-left: 10px;" >
+                <div class="input-group" style="text-align:center; margin:0 auto;">
+                    <input type="text" class="form-control" name="q" placeholder="{{searchword}}" style="border-radius:20px;width: 233px;">
+                    <span class="input-group-btn"style="margin-left: 5px;">
+                        <button type="submit" class="btn btn-secondary">Search</button>
+                    </span>
+                </div><!-- /input-group -->
+            </form>
+            {% endif %}
         </div>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">

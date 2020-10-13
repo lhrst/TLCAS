@@ -4,12 +4,6 @@
 {% endblock %}
 {% block body %}
 
-<form method="get" action="{% url 'search'  1 1 %}">
-  {% csrf_token %}
-  <input type="search" name = 'q' placeholder="搜索" required>
-  <button type="submit">搜索</button>
-</form>
-
 <ul>
 {% for paper in papers %}
  <li><a href="{% url 'detail' paper.id %}">{{ paper.paper_title }}</a></li>

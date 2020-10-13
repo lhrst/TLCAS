@@ -4,19 +4,11 @@
 {% endblock %}
 {% block body %}
 <main>
-<form class="form-inline my-2 my-lg-0" role="search" method="get" action="{% url 'search' searchword 1 %}" target="_blank">
-    <div class="input-group">
-        <input type="text" class="form-control" name="q" placeholder="{{searchword}}">
-        <span class="input-group-btn">
-            
-            <button type="submit" class="btn btn-secondary">Search</button>
-        </span>
-    </div><!-- /input-group -->
-</form>
-
-<ul>
+<ul type="none">
 {% for paper in page %}
- <li><a href="{% url 'detail' paper.id %}">{{ paper.paper_title }}</a></li>
+
+ <li style="font-size: 20px;"><a href="{% url 'detail' paper.id %}">{{ paper.paper_title }}</a></li>
+
 {% endfor %}
 </ul>
 <!-- 以下为分页栏 -->
