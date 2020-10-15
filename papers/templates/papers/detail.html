@@ -2,5 +2,15 @@
 {% block head %}
 {% endblock %}
 {% block body %}
-{{ paper }}
+<ul>
+<li>conference : {{paper.conference.name}}</li>
+<li>year : {{ paper.conference.year}}</li>
+<li>title : {{paper.paper_title}}</li>
+<li>authors : {{ paper.authors}}</li>
+<li>abstract : {{ paper.abstract}}</li>
+<li>read_link : {{ paper.read_link}}</li>
+<li>pdf_link : {{ paper.pdf_link}}</li>
+<li>affiliations : {{paper.affiliations}} </li>
+</ul>
+
 {% endblock %}
