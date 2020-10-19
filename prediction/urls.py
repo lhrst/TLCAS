@@ -1,8 +1,9 @@
-from django.conf.urls import url
-from django.contrib import admin
+from django.urls import path
 
 from prediction import views  #添加的
 
 urlpatterns = [
-    url(r'^prediction',views.home),
+    # 展示主界面
+    path('prediction/', views.index, name='index'),
+    path('prediction/result/', views.result, name='result'),
 ]

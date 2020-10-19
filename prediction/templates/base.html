@@ -22,6 +22,8 @@
         <!-- head block -->
     </head>
     <body>
-        <p> hello </p>
+        {% include 'nav.html' %}
+        {% block body %}
+        {% endblock %}
     </body>
 </html>

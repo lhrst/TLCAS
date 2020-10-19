@@ -45,10 +45,10 @@ def import_data(dataset_name: str):
             curr_paper.save()
 
 if __name__ == "__main__":
-    import_data('AAAI.csv')
+    #import_data('AAAI.csv')
     import_data('ACL.csv')
-    import_data('CVPR.csv')
-    import_data('ICCV.csv')
-    import_data('ICML.csv')
-    import_data('IJCAI.csv')
-    import_data('NIPS.csv')
+    #import_data('CVPR.csv')
+    #import_data('ICCV.csv')
+    #import_data('ICML.csv')
+    #import_data('IJCAI.csv')
+    #import_data('NIPS.csv')
