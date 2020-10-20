@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-3 border-secondary">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.page != "read" %} active {% endif %}" href="{% url 'inbox'%}?page=unread">未读消息</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.page == "read" %} active {% endif %}" href="{% url 'inbox'%}?page=read">已读消息</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    {% if request.GET.page != "read" %}
+                        <a href="{% url 'check_all_unread' %}" class="btn btn-secondary btn-sm">全标为已读</a>
+                    {% endif %}
+                    {% for msg in inbox_message %}
+                    <div class="card border-0 mt-3" style="cursor:pointer" onclick="window.location='/inbox/{% url 'inbox_detail' msg.id %}'">
+                        <h5 class="card-title">[{{ msg.title }}] {{ msg.content }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ msg.send_time |  date:'Y-m-d H:i:s' }}</h6>
+                    </div>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if message %}
+<script>
+$.toaster("{{ message }}", "错误", "danger");
+</script>
+{% endif %}
+{% endblock %}

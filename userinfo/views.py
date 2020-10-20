@@ -12,6 +12,7 @@ from userinfo import models as user_models
 from userinfo.mycaptcha import views as captcha_views
 from userinfo.emailsender import models as email_models
 from userinfo.emailsender import views as email_views
+from userinfo.inbox import views as inbox_views
 
 def verify_account(username, email, password1, password2, hashkey, captcha) -> str:
     if not captcha_views.verify_captcha(captcha, hashkey):
@@ -97,6 +98,7 @@ def login(request):
                     message = '用户名不存在，请前往注册或进行邮箱认证'
         if message == '':
             auth.login(request, user)
+            inbox_views.send_inbox(user, "系统消息", "欢迎登陆TLCAS-一个专注于功能的论文顶会分析平台")
             return redirect('/profile/' + user.uuid)
         else:
             newcaptcha = captcha_views.generate_captcha()
@@ -136,3 +138,6 @@ def profile_view(request, uuid):
         return render(request, "userinfo/profile.html")
     except:
         raise Http404()
+
+def profile_revise(request, uuid):
+    return HttpResponse("TODO")

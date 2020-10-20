@@ -22,8 +22,19 @@ tasklist
 ## UPDATE
 ### 2020/10/20
 
-#### hx
+1. 所有的`base.html/nav.html/footer.html`以userinfo/templates/下的为准	-hx
 
-1. 所有的`base.html/nav.html/footer.html`以userinfo/templates/下的为准
-2. 
+2. 修复部分papers下的bug   -hx
 
+3. 提供站内通知功能
+
+   ```python
+   from userinfo.inbox import views as inbox_views
+   
+   ### 在合适的地方调用即可发送站内通知
+   ### user: UserInfomation的对象实例，可以是request.user
+   ### title, content都是str
+   inbox_views.send_inbox(user, title, content) 
+   ```
+
+   

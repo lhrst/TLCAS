@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'captcha',
     'userinfo.mycaptcha',
     'userinfo.emailsender',
+    'userinfo.inbox',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
