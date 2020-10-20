@@ -1,16 +1,18 @@
+from userinfo.inbox.views import inbox_overview
 from userinfo.views import profile_view
 from django.urls import path, include
 from userinfo import views as user_views
 from userinfo.mycaptcha import views as captcha_views
+from userinfo.inbox import views as inbox_views
+
 
 urlpatterns = [ 
-    path('login/', user_views.login),
-    path('register/', user_views.register),
-    path('logout/', user_views.logout),
-    path('confirm/', user_views.user_confirm),
-
-    path('profile/<str:uuid>/', user_views.profile_view),
-    
+    path('login/', user_views.login, name="login"),
+    path('register/', user_views.register, name="register"),
+    path('logout/', user_views.logout, name="logout"),
+    path('confirm/', user_views.user_confirm, name="confirm"),
+    path('profile/<str:uuid>/', user_views.profile_view, name="profile"),
+    path('inbox/', inbox_views.inbox_overview, name="inbox"),
     path('captcha/', include('captcha.urls')),
     path('refresh_captcha/', captcha_views.refresh_captcha),
 ]
