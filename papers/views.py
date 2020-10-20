@@ -39,7 +39,9 @@ class MyPaginator(Paginator):   # 继承Paginator
 def index(request):
     papers_list = PaperInfo.objects.all()
     # 随机取五份论文，之后会修改为根据个人兴趣推荐
-    papers = random.sample(list(papers_list), 5)
+    papers = None
+    if papers_list.count() >= 5:
+        papers = random.sample(list(papers_list), 5)
     context = {"papers": papers}
     return render(request, 'papers/index.html', context)
 

@@ -18,3 +18,12 @@ tasklist
 3. `python3 manage.py collectstatic`
 4. `python3 manage.py migrate`
 5. `python3 manage.py runserver`
+
+## UPDATE
+### 2020/10/20
+
+#### hx
+
+1. 所有的`base.html/nav.html/footer.html`以userinfo/templates/下的为准
+2. 
+
