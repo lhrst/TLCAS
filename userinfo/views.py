@@ -97,7 +97,7 @@ def login(request):
                     message = '用户名不存在，请前往注册或进行邮箱认证'
         if message == '':
             auth.login(request, user)
-            return redirect('/')
+            return redirect('/profile/' + user.uuid)
         else:
             newcaptcha = captcha_views.generate_captcha()
             return render(request, "userinfo/login.html", {"captcha": newcaptcha, 'message': message})
