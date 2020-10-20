@@ -138,3 +138,6 @@ def profile_view(request, uuid):
         return render(request, "userinfo/profile.html")
     except:
         raise Http404()
+
+def profile_revise(request, uuid):
+    return HttpResponse("TODO")
