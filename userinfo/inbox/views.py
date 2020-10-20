@@ -7,6 +7,8 @@ import userinfo.inbox.models as inbox_models
 
 # Create your views here.
 def inbox_overview(request):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
     if request.method == "GET":
         page = request.GET.get('page', 'unread')
         inbox_message = None
