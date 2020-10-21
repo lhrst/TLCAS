@@ -59,5 +59,6 @@ def check_all_inbox(user) -> bool:
         user.unread_message = 0
         user.save()
         inbox_models.InboxMessage.objects.filter(user=user).update(has_read=True)
+        return True
     except:
         return False
