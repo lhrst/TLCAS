@@ -7,8 +7,23 @@
 <ul type="none">
 {% for paper in page %}
 
- <li style="font-size: 20px;"><a href="{% url 'detail' paper.id %}">{{ paper.paper_title }}</a></li>
-
+ <div class="pure-g">
+    <div class="pure-u-1-12"></div>
+    <div class="pure-u-1-2">
+          <li style="font-size: 20px;">
+            <br>
+            <div style="color:#063c57;">{{paper.conference.name}} {{ paper.conference.year}}</div>
+            <a href="{% url 'detail' paper.id %}">
+              {{ paper.paper_title }}
+            </a>
+            <br>
+            <div class="css2">{{ paper.abstract}}</div>
+            <div style="color:#838b8f;">{{ paper.authors}}</div>
+            <br>
+          </li>
+    </div>
+    <div class="pure-u-5-12"></div>
+  </div>
 {% endfor %}
 </ul>
 <!-- 以下为分页栏 -->
