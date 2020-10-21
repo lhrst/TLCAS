@@ -1,10 +1,12 @@
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
 import random
 
-from .models import PaperInfo, ConferenceInfo
+from papers.models import PaperInfo, ConferenceInfo
+from userinfo.models import PaperViewHistory
 
 # 分页函数 https://blog.csdn.net/weixin_44951273/article/details/100889972?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param
 
@@ -50,6 +52,18 @@ def index(request):
 
 def detail(request, paper_id):
     paper = get_object_or_404(PaperInfo, pk=paper_id)
+    if request.user.is_authenticated:
+        # 添加论文浏览记录
+        paperView = PaperViewHistory.objects.filter(user=request.user, paper=paper)
+        if paperView.count():
+            first_view = paperView.first()
+            first_view.view_time = timezone.now()
+            first_view.already_deleted = False
+            first_view.view_times += 1
+            first_view.save()
+        else:
+            PaperViewHistory.objects.create(user=request.user, paper=paper)
+
     return render(request, 'papers/detail.html', {'paper': paper})
     # return HttpResponse("The paper id is " + paper_id)
 

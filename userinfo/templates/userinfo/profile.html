@@ -29,6 +29,15 @@
                     </ul>
                 </div>
                 <div class="card-body">
+                    {% if request.GET.page != "collect" %}
+                        {% for paperView in paperViews %}
+                        <div class="card border-0 mt-3" style="cursor:pointer" onclick="window.location='{% url 'detail' paperView.paper.id %}'">
+                            <h5 class="card-title">[{{ paperView.paper.conference.name}}/{{paperView.paper.conference.year}}] {{ paperView.paper.paper_title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ paperView.view_time |  date:'Y-m-d H:i:s' }}  近期浏览{{ paperView.view_times }}次</h6>
+                        </div>
+                        {% endfor %}
+                    {% elif request.GET.page == "collect" %}
+                    {% endif %}
                 </div>
             </div>
         </div>
