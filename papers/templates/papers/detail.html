@@ -2,5 +2,59 @@
 {% block head %}
 {% endblock %}
 {% block body %}
-{{ paper }}
+<ul>
+<br>
+<br>
+<div class="pure-g">
+    <div class="pure-u-1-12"></div>
+    <div class="pure-u-5-6">
+        <div style="font-size: 30px;">{{ paper }}</div>
+        <br>
+        <div style="font-size: 25px;color:#1b1e2259;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ paper.authors}}</div>
+        <hr>
+        <br>
+    </div>
+    <div class="pure-u-1-12"></div>
+</div>
+
+<div class="pure-g">
+    <div class="pure-u-2-24"></div>
+    <div class="pure-u-12-24">
+    <div style="font-size: 20px;">
+        <br>
+        <li><span style="color:#1b1e2259;">abstract : </span>{{ paper.abstract}}</li>
+        <br>
+        <hr>
+        
+    </div>
+    </div>
+    
+    <div class="pure-u-1-24">
+        <div style="border-right-style:solid;border-right-wirth:10px;border-right-color:#0000001a;">
+         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+    <div class="pure-u-1-24"></div>
+    <div class="pure-u-6-24">
+        <br>
+        <li><span style="color:#1b1e2259;">conference : </span>{{paper.conference.name}}</li>
+        <br>
+        <li><span style="color:#1b1e2259;">year : </span>{{ paper.conference.year}}</li>
+        <br>
+        <li><span style="color:#1b1e2259;">title : </span>{{paper.paper_title}}</li>
+        <br>
+        <li><span style="color:#1b1e2259;">authors : </span>{{ paper.authors}}</li>
+        <br>
+        <li><span style="color:#1b1e2259;">affiliations : </span>{{paper.affiliations}} </li>
+        <br>
+        <a class="fa fa-file-pdf-o fa-1x" href={{ paper.pdf_link}} aria-hidden="true">&nbsp;&nbsp;PDF Download</a>
+        <br>
+        <br>
+        <a class="fa fa-book fa-1x" href={{ paper.read_link}} aria-hidden="true">&nbsp;&nbsp;Read Now</a>
+    </div>
+    
+    <div class="pure-u-2-24"></div>
+</div>
+</ul>
 {% endblock %}
