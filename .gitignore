@@ -137,3 +137,6 @@ dmypy.json
 .vscode/
 
 collected_static/
+
+# 增加uwsgi配置
+uwsgi.ini
