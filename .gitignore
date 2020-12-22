@@ -140,3 +140,4 @@ collected_static/
 
 # 增加uwsgi配置
 uwsgi.ini
+TLCAS.wsgi
