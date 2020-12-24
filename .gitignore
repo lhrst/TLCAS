@@ -138,6 +138,8 @@ dmypy.json
 
 collected_static/
 
-# 增加uwsgi配置
-uwsgi.ini
-TLCAS.wsgi
+# 忽略nginx部署文件
+*.sock
+*.ini
+TLCAS_nginx.conf
+uwsgi_param
