@@ -137,3 +137,9 @@ dmypy.json
 .vscode/
 
 collected_static/
+
+# 忽略nginx部署文件
+*.sock
+*.ini
+TLCAS_nginx.conf
+uwsgi_param
