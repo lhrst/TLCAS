@@ -1,7 +1,5 @@
 import datetime
-from userinfo.models import UserInformation
-from django.http.response import Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.validators import validate_email
@@ -131,13 +129,11 @@ def user_confirm(request):
         return render(request, 'userinfo/confirm.html', {'message': message})
 
 def profile_view(request, uuid):
-    try:
-        user = user_models.UserInformation.objects.get(uuid=uuid)
-        if request.user != user:
-            return redirect('/')
-        return render(request, "userinfo/profile.html")
-    except:
-        raise Http404()
+    user = get_object_or_404(user_models.UserInformation, uuid=uuid)
+    if request.user != user and request.is_superuser: # 管理员可以看其他人的资料
+        return redirect('/')
+    paperViews = user_models.PaperViewHistory.objects.filter(user=user, already_deleted=False).order_by("-view_time")[:20]
+    return render(request, "userinfo/profile.html", {"paperViews": paperViews})
 
 def profile_revise(request, uuid):
     return HttpResponse("TODO")
