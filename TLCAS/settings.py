@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-# HTTPS
-SECURE_SSL_REDIRECT = True
 
 # Application definition
 
@@ -47,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -131,7 +128,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'platform_office@163.com'
-EMAIL_HOST_PASSWORD = 'TSNIYIISNKAMNRXN'
+EMAIL_HOST_PASSWORD = 'FFKWLYTDFQRNBARW'
 
 # 注册有效期天数
 CONFIRM_DAYS = 7

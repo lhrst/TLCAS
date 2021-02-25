@@ -4,6 +4,7 @@ from userinfo.models import UserInformation
 class ConfirmString(models.Model):
     code = models.CharField(max_length=256)
     user = models.OneToOneField(UserInformation, on_delete=models.CASCADE)
+    confirmed = models.BooleanField(default=False)
     create_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
