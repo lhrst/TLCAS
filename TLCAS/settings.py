@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '&#2_h_v^$@i#q_1w&we1)xta*^=i)()=1i8lnrx$55p25q#xck'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -128,7 +128,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'platform_office@163.com'
-EMAIL_HOST_PASSWORD = 'TSNIYIISNKAMNRXN'
+EMAIL_HOST_PASSWORD = 'FFKWLYTDFQRNBARW'
 
 # 注册有效期天数
 CONFIRM_DAYS = 7
