@@ -10,22 +10,39 @@
             <a class="nav-item nav-link {% if 'prediction' in request.path %} active {% endif %}" href="/prediction/">内容预测</a>
             <a class="nav-item nav-link {% if 'help' in request.path %} active {% endif %}" href="/help/">帮助</a>
             <a class="nav-item nav-link {% if 'about' in request.path %} active {% endif %}" href="/about/">关于</a>
+            <!-- 搜索栏 -->
+            {% if request.user.is_authenticated %}
+                {% if searchword %}
+                <form class="form-inline my-2 my-lg-0" role="search" method="get" action="{% url 'search' searchword 1 %}" target="_blank" style="margin-left: 10px;" >
+                {% else %}
+                <form class="form-inline my-2 my-lg-0" role="search" method="get" action="{% url 'search' 'AI' 1 %}" target="_blank" style="margin-left: 10px;" >
+                {% endif %}
+                    <div class="input-group" style="text-align:center; margin:0 auto;">
+                        <input type="text" class="form-control" name="q" placeholder="{{searchword}}" style="border-radius:20px;width: 233px;">
+                        <span class="input-group-btn btn-sm"style="margin-left: 5px;">
+                            <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </form>
+            {% endif %}
         </div>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             {% if request.user.is_authenticated %}
             <form class="form-inline">
-                <a href="#">
+                <a href="{% url 'inbox' %}">
                     <i class="fa fa-bell-o" style="font-size:20px;color:white;">
-                    <span class="badge badge-pill badge-danger" style="font-size:5px">4</span>
+                    {% if request.user.unread_message %}
+                    <span class="badge badge-pill badge-danger" style="font-size:5px">{{ request.user.unread_message }}</span>
+                    {% endif %}
                     </i>
                 </a>
             </form>
             {% endif %}
             <li class="nav-item">
                 {% if request.user.is_authenticated %}
-                <a style="margin-left:10px" href="/profile/{{ request.user.uuid }}/" class="btn btn-outline-light btn-sm">个人资料</a>
+                <a style="margin-left:10px" href="{% url 'profile' request.user.uuid %}" class="btn btn-outline-light btn-sm">个人资料</a>
                 {% else %}
-                <a href="/login/" class="btn btn-outline-info btn-sm">登录</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-info btn-sm">登录</a>
                 {% endif %}
             </li>
         </ul>

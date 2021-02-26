@@ -1,7 +1,5 @@
 import datetime
-from userinfo.models import UserInformation
-from django.http.response import Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.validators import validate_email
@@ -12,6 +10,7 @@ from userinfo import models as user_models
 from userinfo.mycaptcha import views as captcha_views
 from userinfo.emailsender import models as email_models
 from userinfo.emailsender import views as email_views
+from userinfo.inbox import views as inbox_views
 
 def verify_account(username, email, password1, password2, hashkey, captcha) -> str:
     if not captcha_views.verify_captcha(captcha, hashkey):
@@ -97,7 +96,8 @@ def login(request):
                     message = '用户名不存在，请前往注册或进行邮箱认证'
         if message == '':
             auth.login(request, user)
-            return redirect('/')
+            inbox_views.send_inbox(user, "系统消息", "欢迎登陆TLCAS-一个专注于功能的论文顶会分析平台")
+            return redirect('/profile/' + user.uuid)
         else:
             newcaptcha = captcha_views.generate_captcha()
             return render(request, "userinfo/login.html", {"captcha": newcaptcha, 'message': message})
@@ -129,10 +129,11 @@ def user_confirm(request):
         return render(request, 'userinfo/confirm.html', {'message': message})
 
 def profile_view(request, uuid):
-    try:
-        user = user_models.UserInformation.objects.get(uuid=uuid)
-        if request.user != user:
-            return redirect('/')
-        return render(request, "userinfo/profile.html")
-    except:
-        raise Http404()
+    user = get_object_or_404(user_models.UserInformation, uuid=uuid)
+    if request.user != user and request.is_superuser: # 管理员可以看其他人的资料
+        return redirect('/')
+    paperViews = user_models.PaperViewHistory.objects.filter(user=user, already_deleted=False).order_by("-view_time")[:20]
+    return render(request, "userinfo/profile.html", {"paperViews": paperViews})
+
+def profile_revise(request, uuid):
+    return HttpResponse("TODO")
