@@ -32,3 +32,12 @@ class PaperViewHistory(models.Model):
         ordering = ["-view_time"]
         verbose_name = "论文浏览记录"
         verbose_name_plural = verbose_name
+
+class UserCollect(models.Model):
+    user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
+    paper = models.ForeignKey(papers_models.PaperInfo, on_delete=models.CASCADE)
+    record_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = '用户论文收藏'
+        verbose_name_plural = verbose_name
