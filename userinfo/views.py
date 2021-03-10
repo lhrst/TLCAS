@@ -23,7 +23,7 @@ def verify_account(username, email, password1, password2, hashkey, captcha) -> s
         return '两次输入的密码不相同'
     if len(password1) < 8 or len(password1) > 128:
         return '密码的长度不应小于8，大于128'
-    if user_models.UserInformation.objects.filter(username=username, is_active=True):
+    if user_models.UserInformation.objects.filter(username=username).exists():
         return '用户名[{}]已被注册'.format(username)
     if '@' in username:
         return '用户名中不能包含@'
@@ -47,18 +47,22 @@ def register(request):
         rq_password2 = request.POST.get('password2', '').strip()
         message = verify_account(rq_username, rq_email, rq_password1, rq_password2, rq_hashkey, rq_captcha)
         if len(message) == 0:
-            newuser = user_models.UserInformation.objects.create(
-                username=rq_username,
-                email=rq_email,
-                password=make_password(rq_password1),
-                is_active=False
-            )
-            # send email
-            code = email_views.make_confirm_string(newuser)
-            email_views.send_email(rq_email, code)
-            message = '注册成功，请前往邮箱确认！'
-            return render(request, "userinfo/register.html", {"captcha": newcaptcha, 
-                "notice": {'message': message, 'sender': '注册成功', 'flag': 'success'}})
+            try:
+                newuser = user_models.UserInformation.objects.create(
+                    username=rq_username,
+                    email=rq_email,
+                    password=make_password(rq_password1),
+                    is_active=False
+                )
+                # send email
+                code = email_views.make_confirm_string(newuser)
+                email_views.send_email(rq_email, code)
+                message = '注册成功，请前往邮箱确认！'
+                return render(request, "userinfo/register.html", {"captcha": newcaptcha, 
+                    "notice": {'message': message, 'sender': '注册成功', 'flag': 'success'}})
+            except:
+                return render(request, "userinfo/register.html", {"captcha": newcaptcha,
+                    "notice": {'message': '请稍后再试', 'sender': '注册失败', 'flag': 'danger'}})
         return render(request, "userinfo/register.html", {"captcha": newcaptcha, 
             "notice": {'message': message, 'sender': '注册失败', 'flag': 'danger'}})
 
