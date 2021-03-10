@@ -117,7 +117,8 @@ def recommend(weights, nums): # weights 是序号与权值的字典, nums表示�
             recommend_dic[tsim[0]] = recommend_dic[tsim[0]] + tsim[1]*weights[key]
     recommend_list = sorted(recommend_dic.items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
     for pap in recommend_list:
-        if pap[0] in weights:
+        if pap[0] in weights.keys(): #bug待修
+            print(pap[0])
             recommend_list.remove(pap)
     return recommend_list[0:nums]
 
