@@ -1,5 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -7,6 +8,7 @@ import random
 
 from papers.models import PaperInfo, ConferenceInfo
 from userinfo.models import PaperViewHistory
+from userinfo.models import UserCollect
 
 # 分页函数 https://blog.csdn.net/weixin_44951273/article/details/100889972?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param
 
@@ -64,7 +66,31 @@ def detail(request, paper_id):
         else:
             PaperViewHistory.objects.create(user=request.user, paper=paper)
 
-    return render(request, 'papers/detail.html', {'paper': paper})
+    collect_state = UserCollect.objects.filter(user=request.user, paper=paper).exists()
+    return render(request, 'papers/detail.html', {'paper': paper, 'collect_state': collect_state})
+    # return HttpResponse("The paper id is " + paper_id)
+
+
+# 收藏论文
+
+
+def collect(request, paper_id):
+    paper = get_object_or_404(PaperInfo, pk=paper_id)
+    if UserCollect.objects.filter(user=request.user, paper=paper).count() == 0:
+        UserCollect.objects.create(user=request.user, paper=paper)
+
+    return redirect('detail', paper.id)
+    # return HttpResponse("The paper id is " + paper_id)
+
+
+# 取消收藏论文
+
+
+def cancel_collect(request, paper_id):
+    paper = get_object_or_404(PaperInfo, pk=paper_id)
+    UserCollect.objects.filter(user=request.user, paper=paper).delete()
+
+    return redirect('detail', paper.id)
     # return HttpResponse("The paper id is " + paper_id)
 
 # 搜索页

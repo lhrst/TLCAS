@@ -47,12 +47,15 @@
         <li><span style="color:#1b1e2259;">authors : </span>{{ paper.authors}}</li>
         <br>
         <li><span style="color:#1b1e2259;">affiliations : </span>{{paper.affiliations}} </li>
+        {% if collect_state == True %}
         <br>
-        <a class="fa fa-heart fa-1x" href={{ paper.pdf_link}} aria-hidden="true">&nbsp;&nbsp;Cancel Collect</a>
+        <a class="fa fa-heart fa-1x" style="border:0;cursor:pointer" href="{% url 'cancel_collect' paper.id %}" aria-hidden="true">&nbsp;&nbsp;Cancel Collect</a>
         <br>
+        {% else %}
         <br>
-        <a class="fa fa-heart-o fa-1x" href={{ paper.pdf_link}} aria-hidden="true">&nbsp;&nbsp;Collect</a>
+        <a class="fa fa-heart-o fa-1x" style="border:0;cursor:pointer" href="{% url 'collect' paper.id %}" aria-hidden="true">&nbsp;&nbsp;Collect</a>
         <br>
+        {% endif %}
         <br>
         <a class="fa fa-file-pdf-o fa-1x" href={{ paper.pdf_link}} aria-hidden="true">&nbsp;&nbsp;PDF Download</a>
         <br>
