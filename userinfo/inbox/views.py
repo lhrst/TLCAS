@@ -1,4 +1,4 @@
-from django.http.response import HttpResponse, JsonResponse
+from django.http.response import Http404, HttpResponse, JsonResponse
 from userinfo import inbox
 from django.shortcuts import render, redirect
 import userinfo.models as userinfo_models
@@ -20,7 +20,10 @@ def inbox_overview(request):
     return JsonResponse({"status": "error", "msg": "GET support only"})
 
 def inbox_detail(request, id):
-    return HttpResponse("TODO")
+    if not inbox_models.InboxMessage.objects.filter(id=id).exists():
+        return Http404()
+    inbox_message = inbox_models.InboxMessage.objects.get(id=id)
+    return render(request, "userinfo/inbox.html", {"inbox_message": inbox_message})
 
 def inbox_check_all_unread(request):
     if check_all_inbox(request.user):

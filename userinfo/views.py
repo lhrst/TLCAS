@@ -110,7 +110,7 @@ def logout(request):
 def user_confirm(request):
     code = request.GET.get('code', None)
     try:
-        confirm = email_models.ConfirmString.objects.get(code=code)
+        confirm = email_models.ConfirmString.objects.get(code=code, confirmed=False)
     except:
         message = '无效的确认请求!'
         return render(request, 'userinfo/confirm.html', {'message': message})
@@ -123,8 +123,8 @@ def user_confirm(request):
         return render(request, 'userinfo/confirm.html', {'message': message})
     else:
         confirm.user.is_active = True
+        confirm.confirmed = True
         confirm.user.save()
-        confirm.delete()
         message = '感谢确认，请使用账户登录！'
         return render(request, 'userinfo/confirm.html', {'message': message})
 
