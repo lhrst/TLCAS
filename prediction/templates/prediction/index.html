@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+<body>
+    <div style="width:800px;margin:10px auto">
+    <h2>提交论文</h2>
+    <form method="post" action="{% url 'result' %}">
+        {% csrf_token %}
+        <table>
+            <tr><td>标题：</td><td><input type="text" style="width:500px" name="title"/></td></tr>
+            <tr><td>内容：</td><td><textarea style="width:500px;height:200px" name="content"></textarea></td></tr>
+            <tr><td>作者：</td><td><input type="text" style="width:500px" name="author"/></td></tr>
+            <tr><td></td><td><input type="submit" value="提交" /></td></tr>
+        </table>
+    </form>
+    
+    </div>
+</body>
+
+<!-- <ul> -->
+<!-- <li><a href="{% url 'result'%}">{{ "预测结果" }}</a></li> -->
+<!-- </ul> -->
+
+{% endblock %}
