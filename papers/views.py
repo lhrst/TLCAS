@@ -1,5 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -7,6 +8,12 @@ import random
 
 from papers.models import PaperInfo, ConferenceInfo
 from userinfo.models import PaperViewHistory
+from userinfo.models import UserCollect
+
+import gensim
+import pandas as pd
+from gensim.models.doc2vec import Doc2Vec
+import os, math
 
 # 分页函数 https://blog.csdn.net/weixin_44951273/article/details/100889972?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param
 
@@ -40,10 +47,15 @@ class MyPaginator(Paginator):   # 继承Paginator
 # 论文首页，应该是论文列表加上搜索框
 def index(request):
     papers_list = PaperInfo.objects.all()
+    papers = []
     # 随机取五份论文，之后会修改为根据个人兴趣推荐
-    papers = None
-    if papers_list.count() >= 5:
-        papers = random.sample(list(papers_list), 5)
+    if request.user.is_authenticated:
+        recommend_dic = get_weights(request.user)
+        recommend_result = recommend(recommend_dic, 10)
+        for element in recommend_result:
+            papers.append(papers_list[int(element[0])])
+    else:
+        papers = random.sample(list(papers_list), 10)
     context = {"papers": papers}
     return render(request, 'papers/index.html', context)
 
@@ -64,7 +76,31 @@ def detail(request, paper_id):
         else:
             PaperViewHistory.objects.create(user=request.user, paper=paper)
 
-    return render(request, 'papers/detail.html', {'paper': paper})
+    collect_state = UserCollect.objects.filter(user=request.user, paper=paper).exists()
+    return render(request, 'papers/detail.html', {'paper': paper, 'collect_state': collect_state})
+    # return HttpResponse("The paper id is " + paper_id)
+
+
+# 收藏论文
+
+
+def collect(request, paper_id):
+    paper = get_object_or_404(PaperInfo, pk=paper_id)
+    if UserCollect.objects.filter(user=request.user, paper=paper).count() == 0:
+        UserCollect.objects.create(user=request.user, paper=paper)
+
+    return redirect('detail', paper.id)
+    # return HttpResponse("The paper id is " + paper_id)
+
+
+# 取消收藏论文
+
+
+def cancel_collect(request, paper_id):
+    paper = get_object_or_404(PaperInfo, pk=paper_id)
+    UserCollect.objects.filter(user=request.user, paper=paper).delete()
+
+    return redirect('detail', paper.id)
     # return HttpResponse("The paper id is " + paper_id)
 
 # 搜索页
@@ -91,3 +127,31 @@ def search(request, searchword, pindex):
     page = paginator.page(pindex)
     context = {"page": page, "paginator": paginator, "error_msg": error_msg,  "searchword": searchword}
     return render(request, 'papers/result.html', context)
+
+
+
+def recommend(weights, nums): # weights 是序号与权值的字典, nums表示最终列表的元素数量, 返回列表的第一个元素是序号, 第二个元素是权重
+    model = Doc2Vec.load('./papers/static/doc2vec_recommendation/doc2vec_model.model')
+    papers_list = PaperInfo.objects.all()
+    recommend_dic = {}
+    for key in weights:
+        inferred_vector_dm = model.infer_vector(papers_list[key].abstract.split(','))
+        sims = model.docvecs.most_similar([inferred_vector_dm], topn=nums+1)
+        for tsim in sims:
+            if tsim[0] not in recommend_dic:
+                recommend_dic[tsim[0]] = 0
+            recommend_dic[tsim[0]] = recommend_dic[tsim[0]] + tsim[1]*weights[key]
+    recommend_list = sorted(recommend_dic.items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
+    for pap in recommend_list:
+        if pap[0] in weights.keys(): #bug待修
+            print(pap[0])
+            recommend_list.remove(pap)
+    return recommend_list[0:nums]
+
+def get_weights(user):
+    print(user)
+    viewlist = PaperViewHistory.objects.filter(user=user, already_deleted=False).order_by("-view_times")
+    viewdict = {}
+    for view_record in viewlist:
+        viewdict[view_record.paper.pk-1] = 1 + math.log(view_record.view_times, 10)
+    return viewdict
