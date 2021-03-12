@@ -1,4 +1,3 @@
-import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.expressions import OrderBy
@@ -7,7 +6,7 @@ from papers import models as papers_models
 
 class UserInformation(AbstractUser):
     password = models.CharField(max_length=128, null=True, blank=True)
-    uuid = models.CharField(max_length=36, default=uuid.uuid1())
+    uuid = models.CharField(max_length=36, null=True, blank=True)
     unread_message = models.IntegerField(default=0)
 
     def __str__(self):

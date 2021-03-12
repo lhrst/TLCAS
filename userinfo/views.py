@@ -1,4 +1,4 @@
-import datetime
+import datetime, uuid
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.conf import settings
@@ -52,7 +52,8 @@ def register(request):
                     username=rq_username,
                     email=rq_email,
                     password=make_password(rq_password1),
-                    is_active=False
+                    is_active=False,
+                    uuid=uuid.uuid1()
                 )
                 # send email
                 code = email_views.make_confirm_string(newuser)
