@@ -3,7 +3,38 @@
 {% block head %}
 {% endblock %}
 {% block body %}
-
-<div> 预测结果 </div>
+<body>
+    <div class="pure-g">
+        <div class="pure-u-1-12"></div>
+        <div class="pure-u-1-2">
+            <br>
+            <div style="color:#e4576a;font-size:60px;text-align:center">提交论文</div>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                <table>
+                    <tr><td><div style="color:#999125;font-size:30px">标题：</div></td><td><textarea style="width:660px;height:30px;">{{name}}</textarea></td></tr>
+                    <tr><td></td><td><div style="width:660px;height:20px"></td></tr>
+                    <tr><td><div style="color:#999125;font-size:30px">摘要：</div></td><td><textarea style="width:660px;height:300px">{{content}}</textarea></td></tr>
+                    <tr><td></td><td><div style="width:660px;height:20px"></td></tr>
+                    <tr><td><div style="color:#999125;font-size:30px">作者：</div></td><td><textarea style="width:660px;height:30px;">{{author}}</textarea></td></tr>
+                    <tr><td></td><td><div style="width:660px;height:20px"></td></tr>
+                </table>
+            </form>
+            
+        </div>
+        <div class="pure-u-1-24"></div>
+        <div class="pure-u-7-24">
+            <br><br><br><br><br><br>
+            <div style="color: #f71515;font-size: 50px;">predicted-result: </div>
+            <br><br>
+            <div style="color: #f71515;font-size: 55px;text-align: center;">{{s}}</div>
+            
+        </div>
+    </div>
+    <br><br>
+    <div style="color:#f71515;text-align:center">免责声明：本网站不会保存任何关于你所提交的论文，且本网站预测结果仅供参考</div>
+    <br><br>
+</body>
 
 {% endblock %}
