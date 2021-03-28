@@ -10,4 +10,4 @@ def result(request):
         content = request.POST.get('content')
         author = request.POST.get('author')
     print(name, content, author)
-    return render(request, 'prediction/result.html')
+    return render(request, 'prediction/result.html', {'name': name, 'content': content,'author': author})
