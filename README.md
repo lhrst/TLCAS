@@ -1,4 +1,4 @@
-# TLCAS
+# 学术顶级会议分析系统
 top_level_conference_analysis_system
 这是一个AI领域七个顶级会议(CCF-A)的论文分析系统，我们希望通过这个系统，能找到该领域的学术研究趋势，并帮助研究者更敏锐地发现新的学术热点。
 
@@ -11,23 +11,24 @@ top_level_conference_analysis_system
   - [x] 将数据集批量导入models中
 - [x] 首页，搜索页，详情页
 - [x] 用户资料页
-- [ ] 用户收藏论文，最近观看论文
-- [ ] 用户论文推荐系统
+- [x] 用户收藏论文，最近观看论文
+
+
 
 ## BUILD
->由于本地配置的python3环境不同，如果以下命令执行失败，可以尝试将`python3`替换为`python`，`pip3`替换为`pip`重试，
-1. `git pull origin master`
-2. `pip3 install -r requirements` 或 `python3 -m pip install -r requirements`
-3. `python3 manage.py collectstatic`
-4. `python3 manage.py migrate`
-5. `python3 manage.py runserver`
+
+1. `pip install -r requirements`
+2. `python manage.py collectstatic`
+3. `python manage.py migrate`
+4. `python manage.py runserver`
+
+
 
 ## UPDATE
-### 2020/10/20
 
-1. 所有的`base.html/nav.html/footer.html`以userinfo/templates/下的为准	-hx
+1. 所有的`base.html/nav.html/footer.html`以userinfo/templates/下的为准
 
-2. 修复部分papers下的bug   -hx
+2. 修复部分papers下的bug
 
 3. 提供站内通知功能
 
