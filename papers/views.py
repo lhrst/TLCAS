@@ -52,8 +52,11 @@ def index(request):
     if request.user.is_authenticated:
         recommend_dic = get_weights(request.user)
         recommend_result = recommend(recommend_dic, 10)
-        for element in recommend_result:
-            papers.append(papers_list[int(element[0])])
+        if(len(recommend_result) < 5):
+            papers = random.sample(list(papers_list), 10)
+        else:    
+            for element in recommend_result:
+                papers.append(papers_list[int(element[0])])
     else:
         papers = random.sample(list(papers_list), 10)
     context = {"papers": papers}
