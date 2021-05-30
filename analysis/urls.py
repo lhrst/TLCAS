@@ -1,9 +1,5 @@
 from django.urls import path
-from analysis import views
 
-<<<<<<< Updated upstream
-urlpatterns = [ 
-=======
 from analysis import views  #添加的
 
 urlpatterns = [
@@ -32,5 +28,4 @@ urlpatterns = [
     path('analysis/ICCV2/', views.ICCV2, name='ICCV2'),
     path('analysis/NIPS2/', views.NIPS2, name='NIPS2'),
     path('analysis/IJCAI2/', views.IJCAI2, name='IJCAI2'),
->>>>>>> Stashed changes
 ]

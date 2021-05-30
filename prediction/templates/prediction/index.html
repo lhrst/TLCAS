@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+<body>
+    <div class="pure-g">
+        <div class="pure-u-1-12"></div>
+        <div class="pure-u-1-2">
+            <br>
+            <div style="color:#e4576a;font-size:60px;text-align:center">提交论文</div>
+            <br>
+            <form method="post" action="{% url 'result' %}">
+                {% csrf_token %}
+                <table>
+                    <tr><td ><div style="color:#999125;font-size:30px">标题：</div></td><td><textarea style="width:660px;height:30px" name="title"></textarea></td></tr>
+                    <tr><td></td><td><div style="width:660px;height:20px"></td></tr>
+                    <tr><td><div style="color:#999125;font-size:30px">摘要：</div></td><td><textarea style="width:660px;height:300px" name="content"></textarea></td></tr>
+                    <tr><td></td><td><div style="width:660px;height:20px"></td></tr>
+                    <tr><td><div style="color:#999125;font-size:30px">作者：</div></td><td><textarea style="width:660px;height:30px" name="author"></textarea></td></tr>
+                    <tr><td></td><td><div style="width:660px;height:20px"></td></tr>
+                    <tr><td></td><td><input type="submit" style="font-size:20px" value="提交" /></td></tr>
+                </table>
+            </form>
+            
+        </div>
+        <div class="pure-u-1-24"></div>
+        <div class="pure-u-1-4">
+            <br><br><br>
+            <div style="color:#4c26d3;font-size:32px">学术论文写作相关建议： </div>
+            <div style="color:#1e8a39;font-size:24px">
+                关于题目：<br/>
+            </div>
+                <div style="color:#5ec73d;font-size:16px">
+                1.题目尽量的短并且没有歧义，能够充分描述研究，包含描述研究的关键词，如果可能，加入研究的关键结果。<br/>
+                2.作者应该避免加入无关的细节，比如目标，方法等。<br/>
+                3.题目应该避免无用词语。<br/>
+                4.在题目中要避免缩写或首字母缩写。<br/>
+                5.题目要使用主动语态。<br/>
+                6.题目不要过于笼统也不要过于具体。<br/>
+                7.不要在题目中使用讽刺，双关，或者幽默。<br/>
+                8.使用具体的术语。<br/>
+                9.避免使用罗马字母<br/>
+            </div>
+            <br>
+            <div style="color:#aa0fa2;font-size:24px">
+                关于摘要：<br/>
+            </div>
+                <div style="color:#dd3fd0;font-size:16px">
+                    1.摘要的长度应该保持在最多200-300词。<br/>
+                    2.每一部分内容尽量限定在两到三句话，必须把文章的关键信息包含到摘要中。<br/>
+                    3.可以使用主动语态，但是主要使用被动语态。<br/>                     
+                    4.用简洁的，完整的句子。<br/>
+                    5.确保摘要中出现的所有内容都出现在正文中。<br/>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div style="color:#f71515;text-align:center">免责声明：本网站不会保存任何关于你所提交的论文，且本网站预测结果仅供参考</div>
+    <br><br>
+</body>
+
+<!-- <ul> -->
+<!-- <li><a href="{% url 'result'%}">{{ "预测结果" }}</a></li> -->
+<!-- </ul> -->
+
+{% endblock %}

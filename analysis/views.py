@@ -1,8 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-<<<<<<< Updated upstream
-# Create your views here.
-=======
 def index(request):
     return render(request, 'analysis/index.html')
 
@@ -54,4 +52,3 @@ def IJCAI1(request):
     return render(request, 'analysis/IJCAI1.html')
 def IJCAI2(request):
     return render(request, 'analysis/IJCAI2.html')
->>>>>>> Stashed changes

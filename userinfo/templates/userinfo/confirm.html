@@ -2,9 +2,13 @@
 {% load static %}
 {% block head %}
 <script>
-    $.toaster("{{message}}")
-    window.setTimeout("window.location='/login/'",1000);
+    window.setTimeout("window.location='{% url 'login' %}'", 1000);
 </script>
 {% endblock %}
 {% block body %}
+{% if message %}
+<script>
+    $.toaster("{{ message }}");
+</script>
+{% endif %}
 {% endblock %}

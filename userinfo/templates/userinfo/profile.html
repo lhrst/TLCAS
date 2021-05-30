@@ -12,8 +12,8 @@
                     <p>用户名：{{request.user.username}}</p>
                     <p>邮箱：{{request.user.email}}</p>
                     <p>注册日期：{{request.user.date_joined}}</p>
-                    <a href="/profile/revise/" class="btn btn-primary">修改</a>
-                    <a href="/logout/" class="btn btn-danger">登出</a>
+                    <a href="{% url 'revise' request.user.uuid %}" class="btn btn-primary">修改</a>
+                    <a href="{% url 'logout' %}" class="btn btn-danger">登出</a>
                 </div>
             </div>
             {% endif %}
@@ -21,14 +21,23 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link {% if request.GET.page != "collect" %} active {% endif %}" href="/profile/{{request.user.uuid}}/?page=history">近期浏览</a>
+                            <a class="nav-link {% if request.GET.page != "collect" %} active {% endif %}" href="{% url 'profile' request.user.uuid %}?page=history">近期浏览</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if request.GET.page == "collect" %} active {% endif %}" href="/profile/{{request.user.uuid}}/?page=collect">论文收藏</a>
+                            <a class="nav-link {% if request.GET.page == "collect" %} active {% endif %}" href="{% url 'profile' request.user.uuid %}?page=collect">论文收藏</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
+                    {% if request.GET.page != "collect" %}
+                        {% for paperView in paperViews %}
+                        <div class="card border-0 mt-3" style="cursor:pointer" onclick="window.location='{% url 'detail' paperView.paper.id %}'">
+                            <h5 class="card-title">[{{ paperView.paper.conference.name}}/{{paperView.paper.conference.year}}] {{ paperView.paper.paper_title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ paperView.view_time |  date:'Y-m-d H:i:s' }}  近期浏览{{ paperView.view_times }}次</h6>
+                        </div>
+                        {% endfor %}
+                    {% elif request.GET.page == "collect" %}
+                    {% endif %}
                 </div>
             </div>
         </div>
