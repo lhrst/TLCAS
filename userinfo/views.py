@@ -52,13 +52,15 @@ def register(request):
                     username=rq_username,
                     email=rq_email,
                     password=make_password(rq_password1),
-                    is_active=False,
+                    is_active=True,     #####修改
                     uuid=uuid.uuid1()
                 )
                 # send email
-                code = email_views.make_confirm_string(newuser)
+                '''
+                code = email_views.make_confirm_string(newuser)  #####修改
                 email_views.send_email(rq_email, code)
-                message = '注册成功，请前往邮箱确认！'
+                '''
+                message = '注册成功，请前往登录界面！'             #####修改
                 return render(request, "userinfo/register.html", {"captcha": newcaptcha, 
                     "notice": {'message': message, 'sender': '注册成功', 'flag': 'success'}})
             except:
