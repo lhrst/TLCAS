@@ -5,27 +5,92 @@
 {% block body %}
 
 <body>
-    <br>
     <div class="pure-u-1-12"></div>
-    <a style="color:#100e16;font-size:30px;text-align:center" href="{% url 'AAAI'%}" aria-hidden="true">AAAI</a>
+    <div class="pure-u-5-12">
+        <br>
+        <br>
+        <div style="font-size: 60px;color:#e4576a;">
+            论文分析
+        </div>
+        <div style="font-size: 25px;color:#1b1e2259;">
+            对已有的大量论文进行数据分析
+            <br>
+            反映七大会议所收录论文的特点与发展趋势
+        </div>
+        <br>
+    </div>
     <br>
-    <div class="pure-u-1-12"></div>
-    <a style="color:#100e16;font-size:30px;text-align:center" href="{% url 'ACL'%}" aria-hidden="true">ACL</a>
-    <br>
-    <div class="pure-u-1-12"></div>
-    <a style="color:#100e16;font-size:30px;text-align:center" href="{% url 'CVPR'%}" aria-hidden="true">CVPR</a>
-    <br>
-    <div class="pure-u-1-12"></div>
-    <a style="color:#100e16;font-size:30px;text-align:center" href="{% url 'ICML'%}" aria-hidden="true">ICML</a>
-    <br>
-    <div class="pure-u-1-12"></div>
-    <a style="color:#100e16;font-size:30px;text-align:center" href="{% url 'ICCV'%}" aria-hidden="true">ICCV</a>
-    <br>
-    <div class="pure-u-1-12"></div>
-    <a style="color:#100e16;font-size:30px;text-align:center" href="{% url 'NIPS'%}" aria-hidden="true">NIPS</a>
-    <br>
-    <div class="pure-u-1-12"></div>
-    <a style="color:#100e16;font-size:30px;text-align:center" href="{% url 'IJCAI'%}" aria-hidden="true">IJCAI</a>
+    <div class="pure-u-1-8"></div>
+    <div class="pure-u-1-4">
+        <div>
+            <div style="color:#67cce6;font-size:50px;" href="{% url 'AAAI'%}" aria-hidden="true"><b>AAAI</b></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'AAAI1'%}" aria-hidden="true">· 论文接收</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'AAAI'%}" aria-hidden="true">· 热词统计</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'AAAI2'%}" aria-hidden="true">· 应用领域</a>
+            <br>
+        </div>
+        <div>
+            <div style="color:#67cce6;font-size:50px;" href="{% url 'ICML'%}" aria-hidden="true"><b>ICML</b></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ICML1'%}" aria-hidden="true">· 论文接收</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ICML'%}" aria-hidden="true">· 热词统计</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ICML2'%}" aria-hidden="true">· 应用领域</a>
+            <br>
+        </div>
+        <div>
+            <div style="color:#67cce6;font-size:50px;" href="{% url 'IJCAI'%}" aria-hidden="true"><b>IJCAI</b></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'IJCAI1'%}" aria-hidden="true">· 论文接收</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'IJCAI'%}" aria-hidden="true">· 热词统计</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'IJCAI2'%}" aria-hidden="true">· 应用领域</a>
+            <br>
+        </div>
+    </div>
+    <div class="pure-u-1-4">
+        <div>
+            <div style="color:#67cce6;font-size:50px;" href="{% url 'ACL'%}" aria-hidden="true"><b>ACL</b></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ACL1'%}" aria-hidden="true">· 论文接收</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ACL'%}" aria-hidden="true">· 热词统计</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ACL2'%}" aria-hidden="true">· 应用领域</a>
+            <br>
+        </div>
+        <div>
+            <div style="color:#67cce6;font-size:50px;" href="{% url 'ICCV'%}" aria-hidden="true"><b>ICCV</b></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ICCV1'%}" aria-hidden="true">· 论文接收</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ICCV'%}" aria-hidden="true">· 热词统计</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'ICCV2'%}" aria-hidden="true">· 应用领域</a>
+            <br>
+        </div>
+    </div>
+    <div class="pure-u-1-4">
+        <div>
+            <div style="color:#67cce6;font-size:50px;" href="{% url 'CVPR'%}" aria-hidden="true"><b>CVPR</b></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'CVPR1'%}" aria-hidden="true">· 论文接收</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'CVPR'%}" aria-hidden="true">· 热词统计</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'CVPR2'%}" aria-hidden="true">· 应用领域</a>
+            <br>
+        </div>
+        <div>
+            <div style="color:#67cce6;font-size:50px;" href="{% url 'NIPS'%}" aria-hidden="true"><b>NIPS</b></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'NIPS1'%}" aria-hidden="true">· 论文接收</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'NIPS'%}" aria-hidden="true">· 热词统计</a>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#1e1e20ec;font-size:30px;text-align:center" href="{% url 'NIPS2'%}" aria-hidden="true">· 应用领域</a>
+            <br>
+        </div>
+    </div>
+    
 </body>
 
 {% endblock %}

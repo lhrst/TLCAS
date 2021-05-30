@@ -16,11 +16,13 @@
 <body style="height: 100%; margin: 0">
     <div class="pure-u-1-12"></div>
     <div class="pure-u-5-6">
-        <div style="font-size: 50px; color:#67cce6;">IJCAI热词分析</div>
+        <div style="font-size: 50px; color:#67cce6;">应用领域</div>
         <div style="font-size: 25px;color:#1b1e2259;">
-            根据已有的大量论文数据中分析会议热词
+            分析不同类别顶会论文的主要应用领域
             <br>
-            不同会议的分析结果相独立
+            机器学习与学习理论(Machine Learning and Learning Theory)类别会议--ICML, NIPS
+            <br>
+            <br>
         </div>
     </div>
 
@@ -50,54 +52,40 @@ var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
 
-var dataName=['Generative Adversarial Network',"High Dimension","Social Network","Deep Learning",'Reinforcement Learning',"Natural Language Processing",'Machine learning','Neural Network'];
-var dataValue=[40, 130, 157, 159, 212, 234, 252, 633];
-
 option = {
-    title: {
-    },
-    tooltip: {},
     legend: {
-        data:['x']
+        data: ['ICML', 'NIPS']
     },
-    
-    grid: [
-        {x: '15%', y: '8%', width: '70%', height: '78%'},
-    ],
-    xAxis: [
-       { 
-           type: 'value',
-           boundaryGap: [0, 0.01]
-       }
-    ],
-    yAxis: [
-        {
-            type: 'category',
-            data: dataName
-        }    
-    ],
-    series: [
-        {
-            name: '',
-            type: 'bar',
-            data: dataValue
-        },
-        {
-            type: 'pie',
-            data: [
-                {value: dataValue[7], name: dataName[7]},
-                {value: dataValue[6], name: dataName[6]},
-                {value: dataValue[5], name: dataName[5]},
-                {value: dataValue[4], name: dataName[4]},
-                {value: dataValue[3], name: dataName[3]},
-                {value: dataValue[2], name: dataName[2]},
-                {value: dataValue[1], name: dataName[1]},
-                {value: dataValue[0], name: dataName[0]},
-            ],
-            radius:'45%',
-            center:['70%','55%']  
-        }
-    ]
+    radar: {
+        // shape: 'circle',
+        indicator: [
+            { name: '强化学习（reinforcement learning）', max: 300},
+            { name: '网络与关系学习（Networks and Relational Learning）', max: 300},
+            { name: '迁移与多任务学习（Transfer and Multitask Learning）', max: 300},
+            { name: '对抗样本（Adversarial Examples）', max: 300},
+            { name: '非凸优化（Non-Convex Optimization）', max: 300},
+            { name: '多标签分类（Multi-label Classification）', max: 300}
+        ]
+    },
+    series: [{
+        name: 'ICML',
+        type: 'radar',
+        data: [
+            {
+                value: [205, 163, 128, 89, 59, 45],
+                name: 'ICML'
+            },
+        ]
+    },{
+        name: 'NIPS',
+        type: 'radar',
+        data: [
+            {
+                value: [238, 155, 174, 121, 82, 56],
+                name: 'NIPS'
+            },
+        ]
+    }]
 };
 
 if (option && typeof option === 'object') {

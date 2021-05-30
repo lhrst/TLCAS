@@ -3,6 +3,7 @@
 {% block head %}
 {% endblock %}
 {% block body %}
+
 <!--
     THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=pie-borderRadius
 -->
@@ -11,90 +12,99 @@
     <head>
         <meta charset="utf-8">
     </head>
-    <body style="height: 100%; margin: 0">
-        <div id="container" style="height: 100%"></div>
 
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-        <!-- Uncomment this line if you want to dataTool extension
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
-        -->
-        <!-- Uncomment this line if you want to use gl extension
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
-        -->
-        <!-- Uncomment this line if you want to echarts-stat extension
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
-        -->
-        <!-- Uncomment this line if you want to use map
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/china.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/world.js"></script>
-        -->
-        <!-- Uncomment these two lines if you want to use bmap extension
-        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
-        -->
+<body style="height: 100%; margin: 0">
+    <div class="pure-u-1-12"></div>
+    <div class="pure-u-5-6">
+        <div style="font-size: 50px; color:#67cce6;">NIPS热词分析</div>
+        <div style="font-size: 25px;color:#1b1e2259;">
+            根据已有的大量论文数据中分析会议热词
+            <br>
+            不同会议的分析结果相独立
+        </div>
+    </div>
 
-        <script type="text/javascript">
+    <div id="container" style="height: 100%"></div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <!-- Uncomment this line if you want to dataTool extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to use gl extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to echarts-stat extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to use map
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/china.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/world.js"></script>
+    -->
+    <!-- Uncomment these two lines if you want to use bmap extension
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+    -->
+
+    <script type="text/javascript">
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
 
-var option;
-
-
+var dataName=['Semi-supervised Learning',"Sample Complexity","Graphical Model","Deep Learning",'Stochastic Gradient Descent',"Reinforcement Learning",'Machine learning','Neural Network'];
+var dataValue=[81, 231, 255, 276, 373, 438, 658, 1300];
 
 option = {
-    tooltip: {
-        trigger: 'item'
+    title: {
     },
+    tooltip: {},
     legend: {
-        top: '5%',
-        left: 'center'
+        data:['x']
     },
+    
+    grid: [
+        {x: '15%', y: '8%', width: '70%', height: '78%'},
+    ],
+    xAxis: [
+       { 
+           type: 'value',
+           boundaryGap: [0, 0.01]
+       }
+    ],
+    yAxis: [
+        {
+            type: 'category',
+            data: dataName
+        }    
+    ],
     series: [
         {
-            name: 'NIPS Hotword',
+            name: '',
+            type: 'bar',
+            data: dataValue
+        },
+        {
             type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            itemStyle: {
-                borderRadius: 10,
-                borderColor: '#fff',
-                borderWidth: 2
-            },
-            label: {
-                show: false,
-                position: 'center'
-            },
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: '40',
-                    fontWeight: 'bold'
-                }
-            },
-            labelLine: {
-                show: false
-            },
             data: [
-                {value: 1300, name: 'Neural Neteork'},
-                {value: 658, name: 'Machine learning'},
-                {value: 438, name: 'Reinforcement Learning'},
-                {value: 373, name: 'Stochastic Gradient Descent'},
-                {value: 276, name: 'Deep Learning'},
-                {value: 255, name: 'Graphical Model'},
-	{value: 231, name: 'Sample Complexity'},
-	{value: 81, name: 'Semi-supervised Learning'},
-            ]
+                {value: dataValue[7], name: dataName[7]},
+                {value: dataValue[6], name: dataName[6]},
+                {value: dataValue[5], name: dataName[5]},
+                {value: dataValue[4], name: dataName[4]},
+                {value: dataValue[3], name: dataName[3]},
+                {value: dataValue[2], name: dataName[2]},
+                {value: dataValue[1], name: dataName[1]},
+                {value: dataValue[0], name: dataName[0]},
+            ],
+            radius:'45%',
+            center:['70%','55%']  
         }
     ]
 };
 
 if (option && typeof option === 'object') {
-    myChart.setOption(option);
+myChart.setOption(option);
 }
 
-        </script>
-    </body>
-</html>
-    
+    </script>
+</body>
+
 {% endblock %}

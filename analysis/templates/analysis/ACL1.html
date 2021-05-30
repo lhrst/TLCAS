@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=pie-borderRadius
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+    </head>
+
+<body style="height: 100%; margin: 0">
+    <div class="pure-u-1-12"></div>
+    <div class="pure-u-5-6">
+        <div style="font-size: 50px; color:#67cce6;">ACL</div>
+        <div style="font-size: 20px;">ACL 是 Annual Meeting of the Association for Computational Linguistics的缩写，即国际计算语言学会议，是自然语言处理与计算语言学领域最高级别的学术会议，由计算语言学协会主办，每年一届。</div>
+        <br>
+    </div>
+    
+    <div id="container" style="height: 80%; width: 1200px;margin-left: auto;margin-right: auto; " ></div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <!-- Uncomment this line if you want to dataTool extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to use gl extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to echarts-stat extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to use map
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/china.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/world.js"></script>
+    -->
+    <!-- Uncomment these two lines if you want to use bmap extension
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+    -->
+
+    <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+var option;
+
+
+
+option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            crossStyle: {
+                color: '#999'
+            }
+        }
+    },
+    toolbox: {
+        feature: {
+            dataView: {show: true, readOnly: false},
+            magicType: {show: true, type: ['line', 'bar']},
+            restore: {show: true},
+            saveAsImage: {show: true}
+        }
+    },
+    legend: {
+        data: ['Long Paper接收数', 'Short Paper接收数', 'Long Paper接收率', 'Short Paper接收率']
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            axisPointer: {
+                type: 'shadow'
+            }
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: '论文接收数',
+            min: 0,
+            max: 600,
+            interval: 100,
+            axisLabel: {
+                formatter: '{value} '
+            }
+        },
+        {
+            type: 'value',
+            name: '论文接收率',
+            min: 0,
+            max: 30,
+            interval: 5,
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        }
+    ],
+    series: [
+        {
+            name: 'Long Paper接收数',
+            type: 'bar',
+            data: [146, 173, 231, 195, 258, 447, 571]
+        },
+        {
+            name: 'Short Paper接收数',
+            type: 'bar',
+            data: [139, 145, 97, 107, 126, 213, 208]
+        },        
+        {
+            name: 'Long Paper接收率',
+            type: 'line',
+            yAxisIndex: 1,
+            data: [26.2, 25.0, 28.0, 25.0, 25.3, 25.7, 25.4]
+        },
+        {
+            name: 'Short Paper接收率',
+            type: 'line',
+            yAxisIndex: 1,
+            data: [26.1, 22.4, 21.0, 18.9, 24.0, 18.2, 17.6]
+        }
+    ]
+};
+
+if (option && typeof option === 'object') {
+myChart.setOption(option);
+}
+
+    </script>
+</body>
+
+{% endblock %}
