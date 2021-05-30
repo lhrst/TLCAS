@@ -1,3 +1,9 @@
 django
 django-simple-captcha
+<<<<<<< Updated upstream
 pandas
+=======
+pandas
+NLTK
+gensim
+>>>>>>> Stashed changes

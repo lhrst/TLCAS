@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=pie-borderRadius
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+    </head>
+
+<body style="height: 100%; margin: 0">
+    <div class="pure-u-1-12"></div>
+    <div class="pure-u-5-6">
+        <div style="font-size: 50px; color:#67cce6;">应用领域</div>
+        <div style="font-size: 25px;color:#1b1e2259;">
+            分析不同类别顶会论文的主要应用领域
+            <br>
+            机器学习与学习理论(Machine Learning and Learning Theory)类别会议--ICML, NIPS
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div id="container" style="height: 100%"></div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <!-- Uncomment this line if you want to dataTool extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to use gl extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to echarts-stat extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to use map
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/china.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/world.js"></script>
+    -->
+    <!-- Uncomment these two lines if you want to use bmap extension
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+    -->
+
+    <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+option = {
+    legend: {
+        data: ['ICML', 'NIPS']
+    },
+    radar: {
+        // shape: 'circle',
+        indicator: [
+            { name: '强化学习（reinforcement learning）', max: 300},
+            { name: '网络与关系学习（Networks and Relational Learning）', max: 300},
+            { name: '迁移与多任务学习（Transfer and Multitask Learning）', max: 300},
+            { name: '对抗样本（Adversarial Examples）', max: 300},
+            { name: '非凸优化（Non-Convex Optimization）', max: 300},
+            { name: '多标签分类（Multi-label Classification）', max: 300}
+        ]
+    },
+    series: [{
+        name: 'ICML',
+        type: 'radar',
+        data: [
+            {
+                value: [205, 163, 128, 89, 59, 45],
+                name: 'ICML'
+            },
+        ]
+    },{
+        name: 'NIPS',
+        type: 'radar',
+        data: [
+            {
+                value: [238, 155, 174, 121, 82, 56],
+                name: 'NIPS'
+            },
+        ]
+    }]
+};
+
+if (option && typeof option === 'object') {
+myChart.setOption(option);
+}
+
+    </script>
+</body>
+
+{% endblock %}

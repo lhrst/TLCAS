@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=pie-borderRadius
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+    </head>
+
+<body style="height: 100%; margin: 0">
+    <div class="pure-u-1-12"></div>
+    <div class="pure-u-5-6">
+        <div style="font-size: 50px; color:#67cce6;">ICML</div>
+        <div style="font-size: 20px;">ICML 是 International Conference on Machine Learning的缩写，即国际机器学习大会。ICML如今已发展为由国际机器学习学会（IMLS）主办的年度机器学习国际顶级会议。</div>
+        <br>
+    </div>
+    
+    <div id="container" style="height: 80%; width: 1200px;margin-left: auto;margin-right: auto; " ></div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <!-- Uncomment this line if you want to dataTool extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to use gl extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to echarts-stat extension
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+    -->
+    <!-- Uncomment this line if you want to use map
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/china.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/world.js"></script>
+    -->
+    <!-- Uncomment these two lines if you want to use bmap extension
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+    -->
+
+    <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+var option;
+
+
+
+option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            crossStyle: {
+                color: '#999'
+            }
+        }
+    },
+    toolbox: {
+        feature: {
+            dataView: {show: true, readOnly: false},
+            magicType: {show: true, type: ['line', 'bar']},
+            restore: {show: true},
+            saveAsImage: {show: true}
+        }
+    },
+    legend: {
+        data: ['论文接收数' , '论文接收率']
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            axisPointer: {
+                type: 'shadow'
+            }
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: '论文接收数',
+            min: 0,
+            max: 1200,
+            interval: 200,
+            axisLabel: {
+                formatter: '{value} '
+            }
+        },
+        {
+            type: 'value',
+            name: '论文接收率',
+            min: 0,
+            max: 30,
+            interval: 5,
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        }
+    ],
+    series: [
+        {
+            name: '论文接收数',
+            type: 'bar',
+            data: [152, 246, 116, 310, 270, 322, 434, 621, 773, 1088]
+        },
+        {
+            name: '论文接收率',
+            type: 'line',
+            yAxisIndex: 1,
+            data: [, , , 22.0, 26.0, 24.0, 25.8, 24.9, 22.6, 21.8]
+        }
+    ]
+};
+
+if (option && typeof option === 'object') {
+myChart.setOption(option);
+}
+
+    </script>
+</body>
+
+{% endblock %}
