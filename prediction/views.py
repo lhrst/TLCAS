@@ -71,7 +71,10 @@ def result(request):
 
     result = "AAAI, IJCAI"
     score = max(score_NLP, score_REC, score_LEA, score_AI)
-    if score == score_AI:
+    
+    if len(content) < 100:
+        result= "None"
+    elif score == score_AI:
         result = "AAAI, IJCAI"
     elif score == score_LEA:
         result= "ICML, NIPS"
